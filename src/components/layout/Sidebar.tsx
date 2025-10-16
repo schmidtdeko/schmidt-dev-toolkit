@@ -9,7 +9,8 @@ import {
   CreditCard,
   KeyRound,
   Hash,
-  X
+  X,
+  LayoutDashboard
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -19,6 +20,12 @@ interface SidebarProps {
 }
 
 const tools = [
+  {
+    category: '📊 VISÃO GERAL',
+    items: [
+      { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+    ]
+  },
   {
     category: '📝 GERADORES',
     items: [

@@ -18,6 +18,7 @@ import { UUIDGenerator } from "@/components/tools/UUIDGenerator";
 import { CharCounter } from "@/components/tools/CharCounter";
 import { XMLFormatter } from "@/components/tools/XMLFormatter";
 import { PercentageCalculator } from "@/components/tools/PercentageCalculator";
+import { Dashboard } from "@/components/tools/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => {
                 <div className="max-w-6xl mx-auto">
                   <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/cpf-generator" element={<CPFGenerator />} />
                     <Route path="/cnpj-generator" element={<CNPJGenerator />} />
                     <Route path="/validator" element={<Validator />} />
