@@ -46,6 +46,7 @@ const tools = [
     category: '🔄 CONVERSORES',
     items: [
       { name: 'JSON ↔ CSV', path: '/json-csv-converter', icon: RefreshCw },
+      { name: 'Universal (Base64/XML/GZIP)', path: '/universal-converter', icon: RefreshCw },
     ]
   },
   {
