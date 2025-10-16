@@ -16,6 +16,8 @@ import { PasswordGenerator } from "@/components/tools/PasswordGenerator";
 import { HashCalculator } from "@/components/tools/HashCalculator";
 import { UUIDGenerator } from "@/components/tools/UUIDGenerator";
 import { CharCounter } from "@/components/tools/CharCounter";
+import { XMLFormatter } from "@/components/tools/XMLFormatter";
+import { PercentageCalculator } from "@/components/tools/PercentageCalculator";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +52,8 @@ const App = () => {
                     <Route path="/hash-calculator" element={<HashCalculator />} />
                     <Route path="/uuid-generator" element={<UUIDGenerator />} />
                     <Route path="/char-counter" element={<CharCounter />} />
+                    <Route path="/xml-formatter" element={<XMLFormatter />} />
+                    <Route path="/percentage-calculator" element={<PercentageCalculator />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                   </Routes>
                 </div>

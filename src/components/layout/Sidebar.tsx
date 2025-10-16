@@ -45,12 +45,14 @@ const tools = [
     category: '🎨 FORMATADORES',
     items: [
       { name: 'JSON', path: '/json-formatter', icon: Code },
+      { name: 'XML', path: '/xml-formatter', icon: Code },
     ]
   },
   {
     category: '🧮 CALCULADORAS',
     items: [
       { name: 'Hash (MD5/SHA)', path: '/hash-calculator', icon: Calculator },
+      { name: 'Percentual', path: '/percentage-calculator', icon: Calculator },
     ]
   },
   {
