@@ -43,7 +43,7 @@ export const Home = () => {
   return (
     <div className="space-y-0">
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center justify-center py-12 md:py-20">
+      <section className="relative flex items-center justify-center py-4 md:py-6 mb-0 min-h-0">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
@@ -180,7 +180,7 @@ export const Home = () => {
       </section>
 
       {/* Tools Section */}
-      <section id="tools-section" className="py-12 space-y-8">
+      <section id="tools-section" className="py-4 space-y-4 -mt-8">
 
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
