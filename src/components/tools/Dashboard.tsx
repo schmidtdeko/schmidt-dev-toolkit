@@ -151,12 +151,12 @@ export const Dashboard = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center">
-            <Button 
+            {/* <Button 
               onClick={() => window.location.href = '/percentage-calculator'}
               className="mt-4"
             >
               Explorar Ferramentas
-            </Button>
+            </Button> */}
           </CardContent>
         </Card>
 
