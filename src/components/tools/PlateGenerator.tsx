@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CopyButton } from '@/components/CopyButton';
+import { trackToolUsage } from '@/utils/tracking';
 
 type PlateFormat = 'old' | 'mercosul';
 
@@ -25,6 +26,7 @@ export const PlateGenerator = () => {
   const handleGenerate = () => {
     const plates = Array.from({ length: quantity }, () => generatePlate(format));
     setResults(plates);
+    trackToolUsage('placa_generator');
   };
 
   return (

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { v4 as uuidv4, v1 as uuidv1 } from 'uuid';
 import { CopyButton } from '@/components/CopyButton';
+import { trackToolUsage } from '@/utils/tracking';
 
 type UUIDVersion = 'v4' | 'v1';
 
@@ -14,6 +15,7 @@ export const UUIDGenerator = () => {
       version === 'v4' ? uuidv4() : uuidv1()
     );
     setUuids(generated);
+    trackToolUsage('uuid_generator');
   };
 
   return (

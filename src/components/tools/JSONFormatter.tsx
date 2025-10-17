@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CopyButton } from '@/components/CopyButton';
 import { toast } from 'sonner';
+import { trackToolUsage } from '@/utils/tracking';
 
 export const JSONFormatter = () => {
   const [input, setInput] = useState('');
@@ -13,6 +14,7 @@ export const JSONFormatter = () => {
       const formatted = JSON.stringify(parsed, null, 2);
       setOutput(formatted);
       setError('');
+      trackToolUsage('json_formatter');
       toast.success('JSON formatado com sucesso!');
     } catch (e) {
       setError((e as Error).message);

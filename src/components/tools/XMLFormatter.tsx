@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CopyButton } from '@/components/CopyButton';
 import { toast } from 'sonner';
+import { trackToolUsage } from '@/utils/tracking';
 
 export const XMLFormatter = () => {
   const [input, setInput] = useState('');
@@ -89,6 +90,7 @@ export const XMLFormatter = () => {
       const formatted = formatXML(input);
       setOutput(formatted);
       setError('');
+      trackToolUsage('xml_formatter');
       toast.success('XML formatado com sucesso!');
     } catch (e) {
       setError((e as Error).message);

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { generateCPF } from '@/utils/cpf';
 import { CopyButton } from '@/components/CopyButton';
+import { trackToolUsage } from '@/utils/tracking';
 
 export const CPFGenerator = () => {
   const [quantity, setQuantity] = useState(1);
@@ -10,6 +11,7 @@ export const CPFGenerator = () => {
   const handleGenerate = () => {
     const cpfs = Array.from({ length: quantity }, () => generateCPF(formatted));
     setResults(cpfs);
+    trackToolUsage('cpf_generator');
   };
 
   return (
