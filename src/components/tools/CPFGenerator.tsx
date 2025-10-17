@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { generateCPF } from '@/utils/cpf';
 import { CopyButton } from '@/components/CopyButton';
 import { trackToolUsage } from '@/utils/tracking';
+import { ToolLayout } from '@/components/layout/ToolLayout';
 
 export const CPFGenerator = () => {
   const [quantity, setQuantity] = useState(1);
@@ -15,14 +16,10 @@ export const CPFGenerator = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold mb-2">Gerador de CPF</h1>
-        <p className="text-muted-foreground">
-          Gere CPFs válidos para testes. Todos os CPFs gerados passam na validação do dígito verificador.
-        </p>
-      </div>
-
+    <ToolLayout
+      title="Gerador de CPF"
+      description="Gere CPFs válidos para testes. Todos os CPFs gerados passam na validação do dígito verificador."
+    >
       <div className="tool-card space-y-4">
         <div>
           <label className="block text-sm font-medium mb-2">
@@ -69,6 +66,6 @@ export const CPFGenerator = () => {
           </>
         )}
       </div>
-    </div>
+    </ToolLayout>
   );
 };
