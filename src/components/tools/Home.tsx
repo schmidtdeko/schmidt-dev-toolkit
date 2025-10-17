@@ -169,14 +169,14 @@ export const Home = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <button
+        {/* <button
           onClick={scrollToTools}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors animate-bounce cursor-pointer"
           aria-label="Rolar para ver as ferramentas"
         >
           <span className="text-sm font-medium">Role para ver as ferramentas</span>
           <ChevronDown className="h-6 w-6" />
-        </button>
+        </button> */}
       </section>
 
       {/* Tools Section */}

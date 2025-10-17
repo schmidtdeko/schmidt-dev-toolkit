@@ -32,7 +32,8 @@ const TOOLS = [
   'xml_formatter',
   'hash_calculator',
   'char_counter',
-  'percentage_calculator'
+  'percentage_calculator',
+  'typing_test'
 ];
 
 /**
@@ -205,7 +206,8 @@ const formatToolName = (toolName: string): string => {
     xml_formatter: 'XML Formatter',
     hash_calculator: 'Hash',
     char_counter: 'Contador',
-    percentage_calculator: 'Percentual'
+    percentage_calculator: 'Percentual',
+    typing_test: 'Teste de Digitação'
   };
   return names[toolName] || toolName;
 };
