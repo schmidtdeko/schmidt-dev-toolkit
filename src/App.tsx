@@ -20,6 +20,7 @@ import { XMLFormatter } from "@/components/tools/XMLFormatter";
 import { PercentageCalculator } from "@/components/tools/PercentageCalculator";
 import { Dashboard } from "@/components/tools/Dashboard";
 import { UniversalConverter } from "@/components/tools/UniversalConverter";
+import { TypingTest } from "@/components/tools/TypingTest";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ const App = () => {
                     <Route path="/xml-formatter" element={<XMLFormatter />} />
                     <Route path="/percentage-calculator" element={<PercentageCalculator />} />
                     <Route path="/universal-converter" element={<UniversalConverter />} />
+                    <Route path="/typing-test" element={<TypingTest />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                   </Routes>
                 </div>

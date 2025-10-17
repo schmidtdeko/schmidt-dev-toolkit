@@ -67,6 +67,7 @@ const tools = [
     category: '✍️ TEXTO',
     items: [
       { name: 'Contador de Caracteres', path: '/char-counter', icon: Type },
+      { name: 'Teste de Digitação', path: '/typing-test', icon: Type },
     ]
   }
 ];
