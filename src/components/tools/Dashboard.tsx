@@ -152,7 +152,7 @@ export const Dashboard = () => {
           </CardHeader>
           <CardContent className="text-center">
             <Button 
-              onClick={() => window.location.href = '/'}
+              onClick={() => window.location.href = '/percentage-calculator'}
               className="mt-4"
             >
               Explorar Ferramentas
