@@ -152,7 +152,7 @@ export const Dashboard = () => {
           </CardHeader>
           <CardContent className="text-center">
             <Button 
-              onClick={() => window.location.href = '/cpf-generator'}
+              onClick={() => window.location.href = '/'}
               className="mt-4"
             >
               Explorar Ferramentas
