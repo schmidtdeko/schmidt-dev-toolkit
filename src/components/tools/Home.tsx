@@ -1,38 +1,8 @@
 import { Link } from 'react-router-dom';
-import { 
-  FileText, 
-  CheckCircle2, 
-  RefreshCw, 
-  Code, 
-  Calculator, 
-  Type,
-  CreditCard,
-  KeyRound,
-  Hash,
-  ArrowRight,
-  Check,
-  Zap,
-  Github,
-  Users,
-  ChevronDown,
-  Clock
-} from 'lucide-react';
+import { ArrowRight, Check, Zap, Github, Users, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-
-const tools = [
-  { name: 'Gerador de CPF', path: '/cpf-generator', icon: FileText, category: 'Gerador' },
-  { name: 'Gerador de CNPJ', path: '/cnpj-generator', icon: FileText, category: 'Gerador' },
-  { name: 'Validador CPF/CNPJ', path: '/validator', icon: CheckCircle2, category: 'Validador' },
-  { name: 'Placas de Veículo', path: '/plate-generator', icon: CreditCard, category: 'Gerador' },
-  { name: 'Formatador JSON', path: '/json-formatter', icon: Code, category: 'Formatador' },
-  { name: 'JSON ↔ CSV', path: '/json-csv-converter', icon: RefreshCw, category: 'Conversor' },
-  { name: 'Senhas Fortes', path: '/password-generator', icon: KeyRound, category: 'Gerador' },
-  { name: 'Calculadora Hash', path: '/hash-calculator', icon: Calculator, category: 'Calculadora' },
-  { name: 'UUID/GUID', path: '/uuid-generator', icon: Hash, category: 'Gerador' },
-  { name: 'Contador de Caracteres', path: '/char-counter', icon: Type, category: 'Texto' },
-  { name: 'Cron Expression Builder', path: '/cron-builder', icon: Clock, category: 'DevOps' },
-];
+import { toolsConfig } from '@/config/tools'; // Importar a configuração centralizada
 
 export const Home = () => {
   const scrollToTools = () => {
@@ -41,6 +11,8 @@ export const Home = () => {
       toolsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
+
+  const totalTools = toolsConfig.length;
 
   return (
     <div className="space-y-0">
@@ -73,7 +45,7 @@ export const Home = () => {
                 className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 animate-fade-in opacity-0"
                 style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
               >
-                12 utilitários práticos para desenvolvimento, testes e operações. Sem cadastro, sem anúncios, 100% gratuito e open source.
+                {totalTools} utilitários práticos para desenvolvimento, testes e operações. Sem cadastro, sem anúncios, 100% gratuito e open source.
               </p>
 
               {/* Badges */}
@@ -146,7 +118,7 @@ export const Home = () => {
             >
               <div className="relative">
                 <div className="grid grid-cols-3 gap-4">
-                  {tools.slice(0, 9).map((tool, index) => (
+                  {toolsConfig.slice(0, 9).map((tool, index) => (
                     <div
                       key={tool.path}
                       className="tool-card group hover:scale-105 transition-all duration-300"
@@ -186,7 +158,7 @@ export const Home = () => {
 
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {tools.map((tool) => (
+            {toolsConfig.map((tool) => (
               <Link
                 key={tool.path}
                 to={tool.path}
@@ -200,7 +172,7 @@ export const Home = () => {
                     <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
                       {tool.name}
                     </h3>
-                    <p className="text-sm text-muted-foreground">{tool.category}</p>
+                    <p className="text-sm text-muted-foreground">{tool.description}</p>
                   </div>
                   <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                 </div>
@@ -210,7 +182,7 @@ export const Home = () => {
 
           <div className="tool-card text-center space-y-3 mt-8">
             <p className="text-sm text-muted-foreground">
-              Todas as ferramentas funcionam 100% no seu navegador.
+              Todas as {totalTools} ferramentas funcionam 100% no seu navegador.
               <br />
               Nenhum dado é enviado para servidores externos.
             </p>

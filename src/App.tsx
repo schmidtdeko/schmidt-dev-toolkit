@@ -1,29 +1,20 @@
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import React, { useState, Suspense, lazy } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { Toaster as Sonner } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Home } from "@/components/tools/Home";
-import { CPFGenerator } from "@/components/tools/CPFGenerator";
-import { CNPJGenerator } from "@/components/tools/CNPJGenerator";
-import { Validator } from "@/components/tools/Validator";
-import { PlateGenerator } from "@/components/tools/PlateGenerator";
-import { JSONFormatter } from "@/components/tools/JSONFormatter";
-import { JSONCSVConverter } from "@/components/tools/JSONCSVConverter";
-import { PasswordGenerator } from "@/components/tools/PasswordGenerator";
-import { HashCalculator } from "@/components/tools/HashCalculator";
-import { UUIDGenerator } from "@/components/tools/UUIDGenerator";
-import { CharCounter } from "@/components/tools/CharCounter";
-import { XMLFormatter } from "@/components/tools/XMLFormatter";
-import { PercentageCalculator } from "@/components/tools/PercentageCalculator";
-import { Dashboard } from "@/components/tools/Dashboard";
-import { UniversalConverter } from "@/components/tools/UniversalConverter";
-import { TypingTest } from "@/components/tools/TypingTest";
-import CronBuilder from "@/components/tools/CronBuilder";
+import { toolsConfig } from "@/config/tools";
 
 const queryClient = new QueryClient();
+
+// Mapear os paths dos componentes para importações lazy
+const toolComponents = toolsConfig.reduce((acc, tool) => {
+  acc[tool.path] = lazy(() => import(`@/components/tools${tool.path}`));
+  return acc;
+}, {} as Record<string, React.LazyExoticComponent<React.FC>>);
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -44,26 +35,22 @@ const App = () => {
               
               <main className="flex-1 p-6 md:p-8 overflow-auto">
                 <div className="max-w-6xl mx-auto">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/cpf-generator" element={<CPFGenerator />} />
-                    <Route path="/cnpj-generator" element={<CNPJGenerator />} />
-                    <Route path="/validator" element={<Validator />} />
-                    <Route path="/plate-generator" element={<PlateGenerator />} />
-                    <Route path="/json-formatter" element={<JSONFormatter />} />
-                    <Route path="/json-csv-converter" element={<JSONCSVConverter />} />
-                    <Route path="/password-generator" element={<PasswordGenerator />} />
-                    <Route path="/hash-calculator" element={<HashCalculator />} />
-                    <Route path="/uuid-generator" element={<UUIDGenerator />} />
-                    <Route path="/char-counter" element={<CharCounter />} />
-                    <Route path="/xml-formatter" element={<XMLFormatter />} />
-                    <Route path="/percentage-calculator" element={<PercentageCalculator />} />
-                    <Route path="/universal-converter" element={<UniversalConverter />} />
-                    <Route path="/typing-test" element={<TypingTest />} />
-                    <Route path="/cron-builder" element={<CronBuilder />} />
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                  </Routes>
+                  <Suspense fallback={<div>Carregando ferramenta...</div>}>
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      {toolsConfig.map((tool) => {
+                        const ToolComponent = toolComponents[tool.path];
+                        return (
+                          <Route 
+                            key={tool.path} 
+                            path={tool.path} 
+                            element={<ToolComponent />} 
+                          />
+                        );
+                      })}
+                      <Route path="*" element={<Navigate to="/" replace />} />
+                    </Routes>
+                  </Suspense>
                 </div>
               </main>
             </div>
