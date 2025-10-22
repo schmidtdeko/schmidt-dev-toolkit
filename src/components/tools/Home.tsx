@@ -14,7 +14,8 @@ import {
   Zap,
   Github,
   Users,
-  ChevronDown
+  ChevronDown,
+  Clock
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -30,6 +31,7 @@ const tools = [
   { name: 'Calculadora Hash', path: '/hash-calculator', icon: Calculator, category: 'Calculadora' },
   { name: 'UUID/GUID', path: '/uuid-generator', icon: Hash, category: 'Gerador' },
   { name: 'Contador de Caracteres', path: '/char-counter', icon: Type, category: 'Texto' },
+  { name: 'Cron Expression Builder', path: '/cron-builder', icon: Clock, category: 'DevOps' },
 ];
 
 export const Home = () => {

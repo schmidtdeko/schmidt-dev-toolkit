@@ -21,6 +21,7 @@ import { PercentageCalculator } from "@/components/tools/PercentageCalculator";
 import { Dashboard } from "@/components/tools/Dashboard";
 import { UniversalConverter } from "@/components/tools/UniversalConverter";
 import { TypingTest } from "@/components/tools/TypingTest";
+import CronBuilder from "@/components/tools/CronBuilder";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App = () => {
                     <Route path="/percentage-calculator" element={<PercentageCalculator />} />
                     <Route path="/universal-converter" element={<UniversalConverter />} />
                     <Route path="/typing-test" element={<TypingTest />} />
+                    <Route path="/cron-builder" element={<CronBuilder />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                   </Routes>
                 </div>

@@ -10,7 +10,8 @@ import {
   KeyRound,
   Hash,
   X,
-  LayoutDashboard
+  LayoutDashboard,
+  Clock
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -68,6 +69,12 @@ const tools = [
     items: [
       { name: 'Contador de Caracteres', path: '/char-counter', icon: Type },
       { name: 'Teste de Digitação', path: '/typing-test', icon: Type },
+    ]
+  },
+  {
+    category: '⚙️ FERRAMENTAS DE DEV',
+    items: [
+      { name: 'Cron Expression Builder', path: '/cron-builder', icon: Clock },
     ]
   }
 ];
