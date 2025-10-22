@@ -19,6 +19,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Visão Geral',
     description: 'Visão geral das ferramentas e estatísticas de uso.',
     keywords: ['dashboard', 'visão geral', 'estatísticas'],
+    seoTitle: 'Dashboard - Schmidt Dev Toolkit',
+    seoDescription: 'Visão geral das ferramentas e estatísticas de uso do Schmidt Dev Toolkit.',
   },
   {
     name: 'Gerador de CPF',
@@ -27,6 +29,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Geradores',
     description: 'Gere CPFs válidos para testes e desenvolvimento.',
     keywords: ['cpf', 'gerador', 'documento', 'teste'],
+    seoTitle: 'Gerador de CPF - Schmidt Dev Toolkit',
+    seoDescription: 'Gere CPFs válidos para testes e desenvolvimento com o Gerador de CPF do Schmidt Dev Toolkit.',
   },
   {
     name: 'Gerador de CNPJ',
@@ -35,6 +39,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Geradores',
     description: 'Gere CNPJs válidos para testes e desenvolvimento.',
     keywords: ['cnpj', 'gerador', 'documento', 'teste'],
+    seoTitle: 'Gerador de CNPJ - Schmidt Dev Toolkit',
+    seoDescription: 'Gere CNPJs válidos para testes e desenvolvimento com o Gerador de CNPJ do Schmidt Dev Toolkit.',
   },
   {
     name: 'Validador CPF/CNPJ',
@@ -43,6 +49,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Validadores',
     description: 'Valide números de CPF e CNPJ.',
     keywords: ['cpf', 'cnpj', 'validador', 'verificar'],
+    seoTitle: 'Validador CPF/CNPJ - Schmidt Dev Toolkit',
+    seoDescription: 'Valide números de CPF e CNPJ de forma rápida e eficiente com o Validador CPF/CNPJ do Schmidt Dev Toolkit.',
   },
   {
     name: 'Placas de Veículo',
@@ -51,6 +59,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Geradores',
     description: 'Gere placas de veículos no formato Mercosul.',
     keywords: ['placa', 'veículo', 'gerador', 'mercosul'],
+    seoTitle: 'Gerador de Placas de Veículo - Schmidt Dev Toolkit',
+    seoDescription: 'Gere placas de veículos no formato Mercosul para testes e desenvolvimento com o Gerador de Placas de Veículo do Schmidt Dev Toolkit.',
   },
   {
     name: 'Formatador JSON',
@@ -59,6 +69,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Formatadores',
     description: 'Formate e valide JSON de forma legível.',
     keywords: ['json', 'formatador', 'validador', 'código'],
+    seoTitle: 'Formatador JSON - Schmidt Dev Toolkit',
+    seoDescription: 'Formate e valide JSON de forma legível e organizada com o Formatador JSON do Schmidt Dev Toolkit.',
   },
   {
     name: 'JSON ↔ CSV',
@@ -67,6 +79,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Conversores',
     description: 'Converta JSON para CSV e vice-versa.',
     keywords: ['json', 'csv', 'conversor', 'dados'],
+    seoTitle: 'Conversor JSON ↔ CSV - Schmidt Dev Toolkit',
+    seoDescription: 'Converta JSON para CSV e vice-versa de forma simples e rápida com o Conversor JSON ↔ CSV do Schmidt Dev Toolkit.',
   },
   {
     name: 'Senhas Fortes',
@@ -75,6 +89,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Geradores',
     description: 'Gere senhas seguras e aleatórias.',
     keywords: ['senha', 'gerador', 'segurança', 'aleatório'],
+    seoTitle: 'Gerador de Senhas Fortes - Schmidt Dev Toolkit',
+    seoDescription: 'Gere senhas seguras e aleatórias para proteger suas contas com o Gerador de Senhas Fortes do Schmidt Dev Toolkit.',
   },
   {
     name: 'Calculadora Hash',
@@ -83,6 +99,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Calculadoras',
     description: 'Calcule hashes (MD5, SHA-1, SHA-256) de textos.',
     keywords: ['hash', 'md5', 'sha', 'calculadora', 'segurança'],
+    seoTitle: 'Calculadora Hash - Schmidt Dev Toolkit',
+    seoDescription: 'Calcule hashes (MD5, SHA-1, SHA-256) de textos de forma rápida e segura com a Calculadora Hash do Schmidt Dev Toolkit.',
   },
   {
     name: 'UUID/GUID',
@@ -91,6 +109,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Geradores',
     description: 'Gere UUIDs/GUIDs únicos.',
     keywords: ['uuid', 'guid', 'gerador', 'identificador'],
+    seoTitle: 'Gerador de UUID/GUID - Schmidt Dev Toolkit',
+    seoDescription: 'Gere UUIDs/GUIDs únicos para seus projetos com o Gerador de UUID/GUID do Schmidt Dev Toolkit.',
   },
   {
     name: 'Contador de Caracteres',
@@ -99,6 +119,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Texto',
     description: 'Conte caracteres, palavras e linhas de um texto.',
     keywords: ['contador', 'caracteres', 'palavras', 'texto'],
+    seoTitle: 'Contador de Caracteres - Schmidt Dev Toolkit',
+    seoDescription: 'Conte caracteres, palavras e linhas de um texto de forma rápida e precisa com o Contador de Caracteres do Schmidt Dev Toolkit.',
   },
   {
     name: 'XML Formatter',
@@ -107,6 +129,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Formatadores',
     description: 'Formate e valide XML de forma legível.',
     keywords: ['xml', 'formatador', 'validador', 'código'],
+    seoTitle: 'Formatador XML - Schmidt Dev Toolkit',
+    seoDescription: 'Formate e valide XML de forma legível e organizada com o Formatador XML do Schmidt Dev Toolkit.',
   },
   {
     name: 'Calculadora Percentual',
@@ -115,6 +139,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Calculadoras',
     description: 'Calcule porcentagens de forma rápida.',
     keywords: ['porcentagem', 'calculadora', 'percentual'],
+    seoTitle: 'Calculadora Percentual - Schmidt Dev Toolkit',
+    seoDescription: 'Calcule porcentagens de forma rápida e eficiente com a Calculadora Percentual do Schmidt Dev Toolkit.',
   },
   {
     name: 'Conversor Universal',
@@ -123,6 +149,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Conversores',
     description: 'Converta entre Base64, URL, Hex, Binário e mais.',
     keywords: ['conversor', 'base64', 'url', 'hex', 'binário'],
+    seoTitle: 'Conversor Universal - Schmidt Dev Toolkit',
+    seoDescription: 'Converta entre Base64, URL, Hex, Binário e mais com o Conversor Universal do Schmidt Dev Toolkit.',
   },
   {
     name: 'Teste de Digitação',
@@ -131,6 +159,8 @@ export const toolsConfig: ToolConfig[] = [
     category: 'Texto',
     description: 'Teste e melhore sua velocidade de digitação.',
     keywords: ['digitação', 'teste', 'velocidade', 'texto'],
+    seoTitle: 'Teste de Digitação - Schmidt Dev Toolkit',
+    seoDescription: 'Teste e melhore sua velocidade de digitação com o Teste de Digitação do Schmidt Dev Toolkit.',
   },
   {
     name: 'Cron Expression Builder',
