@@ -31,7 +31,7 @@ import {
 
 const COLORS = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#6366f1'];
 
-export const Dashboard = () => {
+const Dashboard = () => {
   const [metrics, setMetrics] = useState(getDashboardMetrics());
   const [isLocalStorageEnabled, setIsLocalStorageEnabled] = useState(true);
   const [animatedTotalUsage, setAnimatedTotalUsage] = useState(0);
@@ -420,3 +420,5 @@ export const Dashboard = () => {
     </div>
   );
 };
+
+export default Dashboard;

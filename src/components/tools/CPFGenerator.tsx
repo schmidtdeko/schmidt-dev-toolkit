@@ -4,7 +4,7 @@ import { CopyButton } from '@/components/CopyButton';
 import { trackToolUsage } from '@/utils/tracking';
 import { ToolLayout } from '@/components/layout/ToolLayout';
 
-export const CPFGenerator = () => {
+const CPFGenerator = () => {
   const [quantity, setQuantity] = useState(1);
   const [formatted, setFormatted] = useState(true);
   const [results, setResults] = useState<string[]>([]);
@@ -69,3 +69,5 @@ export const CPFGenerator = () => {
     </ToolLayout>
   );
 };
+
+export default CPFGenerator;

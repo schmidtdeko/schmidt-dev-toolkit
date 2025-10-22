@@ -10,11 +10,43 @@ import { toolsConfig } from "@/config/tools";
 
 const queryClient = new QueryClient();
 
-// Mapear os paths dos componentes para importações lazy
-const toolComponents = toolsConfig.reduce((acc, tool) => {
-  acc[tool.path] = lazy(() => import(`@/components/tools${tool.path}`));
-  return acc;
-}, {} as Record<string, React.LazyExoticComponent<React.FC>>);
+// Importações lazy explícitas para cada componente de ferramenta
+const LazyDashboard = lazy(() => import("@/components/tools/Dashboard"));
+const LazyCPFGenerator = lazy(() => import("@/components/tools/CPFGenerator"));
+const LazyCNPJGenerator = lazy(() => import("@/components/tools/CNPJGenerator"));
+const LazyValidator = lazy(() => import("@/components/tools/Validator"));
+const LazyPlateGenerator = lazy(() => import("@/components/tools/PlateGenerator"));
+const LazyJSONFormatter = lazy(() => import("@/components/tools/JSONFormatter"));
+const LazyJSONCSVConverter = lazy(() => import("@/components/tools/JSONCSVConverter"));
+const LazyPasswordGenerator = lazy(() => import("@/components/tools/PasswordGenerator"));
+const LazyHashCalculator = lazy(() => import("@/components/tools/HashCalculator"));
+const LazyUUIDGenerator = lazy(() => import("@/components/tools/UUIDGenerator"));
+const LazyCharCounter = lazy(() => import("@/components/tools/CharCounter"));
+const LazyXMLFormatter = lazy(() => import("@/components/tools/XMLFormatter"));
+const LazyPercentageCalculator = lazy(() => import("@/components/tools/PercentageCalculator"));
+const LazyUniversalConverter = lazy(() => import("@/components/tools/UniversalConverter"));
+const LazyTypingTest = lazy(() => import("@/components/tools/TypingTest"));
+const LazyCronBuilder = lazy(() => import("@/components/tools/CronBuilder"));
+
+// Mapear os paths para os componentes lazy
+const toolComponents: Record<string, React.LazyExoticComponent<React.FC>> = {
+  '/dashboard': LazyDashboard,
+  '/cpf-generator': LazyCPFGenerator,
+  '/cnpj-generator': LazyCNPJGenerator,
+  '/validator': LazyValidator,
+  '/plate-generator': LazyPlateGenerator,
+  '/json-formatter': LazyJSONFormatter,
+  '/json-csv-converter': LazyJSONCSVConverter,
+  '/password-generator': LazyPasswordGenerator,
+  '/hash-calculator': LazyHashCalculator,
+  '/uuid-generator': LazyUUIDGenerator,
+  '/char-counter': LazyCharCounter,
+  '/xml-formatter': LazyXMLFormatter,
+  '/percentage-calculator': LazyPercentageCalculator,
+  '/universal-converter': LazyUniversalConverter,
+  '/typing-test': LazyTypingTest,
+  '/cron-builder': LazyCronBuilder,
+};
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -44,7 +76,7 @@ const App = () => {
                           <Route 
                             key={tool.path} 
                             path={tool.path} 
-                            element={<ToolComponent />} 
+                            element={ToolComponent ? <ToolComponent /> : <Navigate to="/" replace />} 
                           />
                         );
                       })}

@@ -42,7 +42,7 @@ const getPasswordStrength = (password: string): { label: string; color: string }
   return { label: 'Forte', color: 'text-secondary' };
 };
 
-export const PasswordGenerator = () => {
+const PasswordGenerator = () => {
   const [length, setLength] = useState(16);
   const [quantity, setQuantity] = useState(5);
   const [options, setOptions] = useState<PasswordOptions>({
@@ -189,3 +189,5 @@ export const PasswordGenerator = () => {
     </div>
   );
 };
+
+export default PasswordGenerator;

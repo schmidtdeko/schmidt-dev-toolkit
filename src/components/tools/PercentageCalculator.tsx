@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ArrowUp, ArrowDown } from 'lucide-react';
 
-export const PercentageCalculator = () => {
+const PercentageCalculator = () => {
   // Card 1: Quanto é X% de Y?
   const [percent1, setPercent1] = useState('');
   const [value1, setValue1] = useState('');
@@ -267,3 +267,5 @@ export const PercentageCalculator = () => {
     </div>
   );
 };
+
+export default PercentageCalculator;
