@@ -17,11 +17,13 @@ import { useCronBuilder } from '@/hooks/useCronBuilder';
 import { CopyButton } from '@/components/CopyButton';
 import { translateCronExpression } from '@/utils/cronTranslator';
 import { cronTemplates, getTemplatesByCategory } from '@/utils/cronTemplates';
-import { BookTemplate } from 'lucide-react';
+import { BookTemplate, FileInput } from 'lucide-react';
 
 const CronBuilder: React.FC = () => {
   const { cronState, setCronState, expression } = useCronBuilder();
   const [translation, setTranslation] = useState('');
+  const [pastedExpression, setPastedExpression] = useState('');
+  const [pastedTranslation, setPastedTranslation] = useState('');
   
   const [minuteMode, setMinuteMode] = useState('every');
   const [minuteValue, setMinuteValue] = useState('');
@@ -160,6 +162,25 @@ const CronBuilder: React.FC = () => {
         setWeekdayMode('specific');
         setWeekdayValue(wkday);
       }
+    }
+  };
+
+  const handlePastedExpressionChange = (value: string) => {
+    setPastedExpression(value);
+    
+    if (value.trim()) {
+      // Traduzir a expressão colada
+      const translated = translateCronExpression(value.trim());
+      setPastedTranslation(translated);
+    } else {
+      setPastedTranslation('');
+    }
+  };
+
+  const handleParseExpression = () => {
+    if (pastedExpression.trim()) {
+      // Reutilizar a mesma lógica do handleTemplateClick
+      handleTemplateClick(pastedExpression.trim());
     }
   };
 
@@ -345,10 +366,43 @@ const CronBuilder: React.FC = () => {
           </Card>
         </div>
 
-        <div>
+        <div className="space-y-4">
+          {/* Parser - Modo Reverso */}
           <Card>
             <CardHeader>
-              <CardTitle>Resultado</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <FileInput className="h-5 w-5" />
+                Analisar Expressão Existente
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex gap-2">
+                <Input
+                  placeholder="Cole uma expressão cron (ex: */5 * * * *)"
+                  value={pastedExpression}
+                  onChange={(e) => handlePastedExpressionChange(e.target.value)}
+                  className="font-mono"
+                />
+                <Button 
+                  onClick={handleParseExpression}
+                  disabled={!pastedExpression.trim()}
+                >
+                  Analisar
+                </Button>
+              </div>
+              {pastedTranslation && (
+                <div className="bg-muted p-3 rounded-md">
+                  <p className="text-sm font-medium mb-1">Tradução:</p>
+                  <p className="text-sm text-muted-foreground">{pastedTranslation}</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Resultado */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Expressão Gerada</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="bg-muted p-4 rounded-md flex items-center justify-between">
