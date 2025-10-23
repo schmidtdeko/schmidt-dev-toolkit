@@ -13,7 +13,7 @@ interface ConversionInfo {
   reduction?: number;
 }
 
-export const UniversalConverter = () => {
+const UniversalConverter = () => {
   const [inputFormat, setInputFormat] = useState<FormatType>('text');
   const [outputFormat, setOutputFormat] = useState<FormatType>('base64');
   const [input, setInput] = useState('');
@@ -423,3 +423,5 @@ export const UniversalConverter = () => {
     </div>
   );
 };
+
+export default UniversalConverter;

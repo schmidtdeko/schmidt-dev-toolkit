@@ -5,7 +5,7 @@ import { trackToolUsage } from '@/utils/tracking';
 
 type UUIDVersion = 'v4' | 'v1';
 
-export const UUIDGenerator = () => {
+const UUIDGenerator = () => {
   const [version, setVersion] = useState<UUIDVersion>('v4');
   const [quantity, setQuantity] = useState(10);
   const [uuids, setUuids] = useState<string[]>([]);
@@ -93,3 +93,5 @@ export const UUIDGenerator = () => {
     </div>
   );
 };
+
+export default UUIDGenerator;

@@ -3,7 +3,7 @@ import { generateCNPJ } from '@/utils/cnpj';
 import { CopyButton } from '@/components/CopyButton';
 import { trackToolUsage } from '@/utils/tracking';
 
-export const CNPJGenerator = () => {
+const CNPJGenerator = () => {
   const [quantity, setQuantity] = useState(1);
   const [formatted, setFormatted] = useState(true);
   const [results, setResults] = useState<string[]>([]);
@@ -72,3 +72,5 @@ export const CNPJGenerator = () => {
     </div>
   );
 };
+
+export default CNPJGenerator;

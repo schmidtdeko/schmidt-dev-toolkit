@@ -5,7 +5,7 @@ import { trackToolUsage } from '@/utils/tracking';
 
 type HashAlgorithm = 'MD5' | 'SHA1' | 'SHA256' | 'SHA512';
 
-export const HashCalculator = () => {
+const HashCalculator = () => {
   const [input, setInput] = useState('');
   const [algorithm, setAlgorithm] = useState<HashAlgorithm>('SHA256');
   const [hash, setHash] = useState('');
@@ -100,3 +100,5 @@ export const HashCalculator = () => {
     </div>
   );
 };
+
+export default HashCalculator;

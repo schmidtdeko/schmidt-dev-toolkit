@@ -3,7 +3,7 @@ import { CopyButton } from '@/components/CopyButton';
 import { toast } from 'sonner';
 import { trackToolUsage } from '@/utils/tracking';
 
-export const JSONFormatter = () => {
+const JSONFormatter = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [error, setError] = useState('');
@@ -107,3 +107,5 @@ export const JSONFormatter = () => {
     </div>
   );
 };
+
+export default JSONFormatter;

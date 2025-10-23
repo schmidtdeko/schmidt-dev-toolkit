@@ -4,7 +4,7 @@ import { validateCNPJ } from '@/utils/cnpj';
 import { CheckCircle2, XCircle } from 'lucide-react';
 import { trackToolUsage } from '@/utils/tracking';
 
-export const Validator = () => {
+const Validator = () => {
   const [input, setInput] = useState('');
   const [result, setResult] = useState<{ isValid: boolean; type: string } | null>(null);
 
@@ -83,3 +83,5 @@ export const Validator = () => {
     </div>
   );
 };
+
+export default Validator;

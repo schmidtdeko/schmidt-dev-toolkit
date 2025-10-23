@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { trackToolUsage } from '@/utils/tracking';
 
-export const CharCounter = () => {
+const CharCounter = () => {
   const [text, setText] = useState('');
   const [hasTracked, setHasTracked] = useState(false);
 
@@ -69,3 +69,5 @@ export const CharCounter = () => {
     </div>
   );
 };
+
+export default CharCounter;

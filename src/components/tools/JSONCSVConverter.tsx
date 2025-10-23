@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import { Download } from 'lucide-react';
 import { trackToolUsage } from '@/utils/tracking';
 
-export const JSONCSVConverter = () => {
+const JSONCSVConverter = () => {
   const [jsonInput, setJsonInput] = useState('');
   const [csvInput, setCsvInput] = useState('');
 
@@ -128,3 +128,5 @@ export const JSONCSVConverter = () => {
     </div>
   );
 };
+
+export default JSONCSVConverter;

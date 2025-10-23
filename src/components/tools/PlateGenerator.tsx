@@ -18,7 +18,7 @@ const generatePlate = (format: PlateFormat): string => {
   }
 };
 
-export const PlateGenerator = () => {
+const PlateGenerator = () => {
   const [format, setFormat] = useState<PlateFormat>('mercosul');
   const [quantity, setQuantity] = useState(1);
   const [results, setResults] = useState<string[]>([]);
@@ -107,3 +107,5 @@ export const PlateGenerator = () => {
     </div>
   );
 };
+
+export default PlateGenerator;

@@ -12,7 +12,7 @@ const TEST_DURATION_SECONDS = 60;
 
 type WordStatus = 'correct' | 'incorrect' | 'untyped';
 
-export const TypingTest = () => {
+const TypingTest = () => {
   const [words, setWords] = useState<string[]>([]);
   const [typedWordsStatus, setTypedWordsStatus] = useState<WordStatus[]>([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -188,3 +188,5 @@ export const TypingTest = () => {
     </ToolLayout>
   );
 };
+
+export default TypingTest;

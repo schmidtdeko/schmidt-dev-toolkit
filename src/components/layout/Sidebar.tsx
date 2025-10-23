@@ -1,76 +1,26 @@
 import { NavLink } from 'react-router-dom';
-import { 
-  FileText, 
-  CheckCircle2, 
-  RefreshCw, 
-  Code, 
-  Calculator, 
-  Type,
-  CreditCard,
-  KeyRound,
-  Hash,
-  X,
-  LayoutDashboard
-} from 'lucide-react';
+import { X } from 'lucide-react'; // Manter apenas X para o botão de fechar
 import { cn } from '@/lib/utils';
+import { toolsConfig } from '@/config/tools'; // Importar a configuração centralizada
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const tools = [
-  {
-    category: '📊 VISÃO GERAL',
-    items: [
-      { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-    ]
-  },
-  {
-    category: '📝 GERADORES',
-    items: [
-      { name: 'CPF', path: '/cpf-generator', icon: FileText },
-      { name: 'CNPJ', path: '/cnpj-generator', icon: FileText },
-      { name: 'Placas de Veículo', path: '/plate-generator', icon: CreditCard },
-      { name: 'Senhas Fortes', path: '/password-generator', icon: KeyRound },
-      { name: 'UUID/GUID', path: '/uuid-generator', icon: Hash },
-    ]
-  },
-  {
-    category: '✔️ VALIDADORES',
-    items: [
-      { name: 'CPF/CNPJ', path: '/validator', icon: CheckCircle2 },
-    ]
-  },
-  {
-    category: '🔄 CONVERSORES',
-    items: [
-      { name: 'JSON ↔ CSV', path: '/json-csv-converter', icon: RefreshCw },
-      { name: 'Universal (Base64/XML/GZIP)', path: '/universal-converter', icon: RefreshCw },
-    ]
-  },
-  {
-    category: '🎨 FORMATADORES',
-    items: [
-      { name: 'JSON', path: '/json-formatter', icon: Code },
-      { name: 'XML', path: '/xml-formatter', icon: Code },
-    ]
-  },
-  {
-    category: '🧮 CALCULADORAS',
-    items: [
-      { name: 'Hash (MD5/SHA)', path: '/hash-calculator', icon: Calculator },
-      { name: 'Percentual', path: '/percentage-calculator', icon: Calculator },
-    ]
-  },
-  {
-    category: '✍️ TEXTO',
-    items: [
-      { name: 'Contador de Caracteres', path: '/char-counter', icon: Type },
-      { name: 'Teste de Digitação', path: '/typing-test', icon: Type },
-    ]
-  }
-];
+// Agrupar as ferramentas por categoria
+const getToolsByCategory = () => {
+  const categories: { [key: string]: typeof toolsConfig[0][] } = {};
+  toolsConfig.forEach(tool => {
+    if (!categories[tool.category]) {
+      categories[tool.category] = [];
+    }
+    categories[tool.category].push(tool);
+  });
+  return categories;
+};
+
+const categorizedTools = getToolsByCategory();
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   return (
@@ -101,13 +51,13 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         </div>
 
         <nav className="p-4 space-y-6 pt-20 md:pt-4">
-          {tools.map((section) => (
-            <div key={section.category}>
+          {Object.entries(categorizedTools).map(([category, items]) => (
+            <div key={category}>
               <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-2">
-                {section.category}
+                {category}
               </h3>
               <ul className="space-y-1">
-                {section.items.map((item) => (
+                {items.map((item) => (
                   <li key={item.path}>
                     <NavLink
                       to={item.path}
