@@ -27,6 +27,7 @@ const LazyPercentageCalculator = lazy(() => import("@/components/tools/Percentag
 const LazyUniversalConverter = lazy(() => import("@/components/tools/UniversalConverter"));
 const LazyTypingTest = lazy(() => import("@/components/tools/TypingTest"));
 const LazyCronBuilder = lazy(() => import("@/components/tools/CronBuilder"));
+const LazyAlarmClock = lazy(() => import("@/components/tools/AlarmClock/AlarmClock"));
 
 // Mapear os paths para os componentes lazy
 const toolComponents: Record<string, React.LazyExoticComponent<React.FC>> = {
@@ -46,6 +47,7 @@ const toolComponents: Record<string, React.LazyExoticComponent<React.FC>> = {
   '/universal-converter': LazyUniversalConverter,
   '/typing-test': LazyTypingTest,
   '/cron-builder': LazyCronBuilder,
+  '/alarm-clock': LazyAlarmClock,
 };
 
 const App = () => {

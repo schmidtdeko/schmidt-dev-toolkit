@@ -172,6 +172,16 @@ export const toolsConfig: ToolConfig[] = [
     seoTitle: 'Cron Expression Builder - Gerador de Expressões Cron | Schmidt Tools',
     seoDescription: 'Crie, valide e teste expressões cron facilmente. Visualize próximas execuções, use templates prontos e entenda cron jobs de forma simples e visual.',
   },
+  {
+    name: 'Despertador Online',
+    path: '/alarm-clock',
+    icon: Clock,
+    category: 'Tempo',
+    description: 'Configure um alarme que toca no navegador em um horário específico.',
+    keywords: ['alarme', 'despertador', 'relógio', 'tempo', 'online'],
+    seoTitle: 'Despertador Online - Schmidt Tools',
+    seoDescription: 'Configure um alarme que toca no navegador em um horário específico com o Despertador Online do Schmidt Tools.',
+  },
 ];
 
 export const getToolsByCategory = () => {
