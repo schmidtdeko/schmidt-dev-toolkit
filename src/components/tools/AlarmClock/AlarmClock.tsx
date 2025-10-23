@@ -5,7 +5,6 @@ import TimeSelector from './components/TimeSelector';
 import AlarmSettings from './components/AlarmSettings';
 import QuickAlarms from './components/QuickAlarms';
 import AlarmHistory from './components/AlarmHistory';
-import VisualSettingsComponent from './components/VisualSettings';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { Separator } from '../../ui/separator';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from '../../ui/dialog';
@@ -28,8 +27,6 @@ const AlarmClock: React.FC = () => {
     setLoop,
     vibration,
     setVibration,
-    visualSettings,
-    handleVisualSettingChange,
     alarmSounds,
     setAlarmTime,
     stopTriggeredAlarm,
@@ -37,28 +34,25 @@ const AlarmClock: React.FC = () => {
     history,
     addAlarmToHistory, // Used for quick alarms to ensure they are added to history
     clearAlarmHistory,
+    showDate,
+    setShowDate,
+    timeFormat,
+    setTimeFormat,
+    isTestingSound, // Passar o novo estado
+    selectedQuickTime,
+    setSelectedQuickTime,
   } = useAlarm();
 
   const handleSetQuickAlarm = (hour: string, minute: string) => {
     setSelectedHour(hour);
     setSelectedMinute(minute);
-    // Automatically set the alarm when a quick alarm is selected
-    const newAlarm = {
-      id: Date.now().toString(),
-      time: `${hour}:${minute}`,
-      isEnabled: true,
-      soundId: selectedSoundId,
-      volume,
-      loop,
-      vibration,
-      createdAt: new Date().toISOString(),
-    };
-    setGlobalAlarm(newAlarm); // Use the global setAlarm from alarmManager
-    // The useAlarm hook will update its state via the callback
+    setSelectedQuickTime(`${hour}:${minute}`); // Definir o horário rápido selecionado
+    // Apenas preenche os campos, não ativa o alarme automaticamente.
+    // O usuário deve clicar no botão "Ativar Alarme" explicitamente.
   };
 
   return (
-    <div className={`min-h-screen ${visualSettings.theme === 'dark' ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
+    <div className="min-h-screen"> {/* Remove conditional theme class */}
       <div className="container mx-auto p-4 space-y-8">
         <Card className="w-full max-w-4xl mx-auto">
           <CardHeader>
@@ -66,7 +60,7 @@ const AlarmClock: React.FC = () => {
           </CardHeader>
           <CardContent className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <AlarmDisplay visualSettings={visualSettings} />
+              <AlarmDisplay showDate={showDate} timeFormat={timeFormat} />
               <Separator />
               <TimeSelector
                 selectedHour={selectedHour}
@@ -76,6 +70,7 @@ const AlarmClock: React.FC = () => {
                 onSetAlarm={setAlarmTime}
                 onTestSound={testAlarmSound}
                 isAlarmSet={!!currentAlarm && currentAlarm.isEnabled}
+                isTestingSound={isTestingSound} // Passar a prop
               />
               <Separator />
               <AlarmSettings
@@ -89,12 +84,18 @@ const AlarmClock: React.FC = () => {
                 onLoopChange={setLoop}
                 onVibrationChange={setVibration}
                 onTestSound={testAlarmSound}
+                showDate={showDate}
+                setShowDate={setShowDate}
+                timeFormat={timeFormat}
+                setTimeFormat={setTimeFormat}
+                isTestingSound={isTestingSound} // Passar a prop
               />
             </div>
             <div className="space-y-6">
               <QuickAlarms
                 onSetQuickAlarm={handleSetQuickAlarm}
                 activeAlarmTime={currentAlarm?.isEnabled ? currentAlarm.time : null}
+                selectedQuickTime={selectedQuickTime} // Passar o estado de horário rápido selecionado
               />
               <Separator />
               <AlarmHistory
@@ -103,15 +104,11 @@ const AlarmClock: React.FC = () => {
                   const [h, m] = time.split(':');
                   setSelectedHour(h);
                   setSelectedMinute(m);
+                  setSelectedQuickTime(time); // Definir o horário rápido selecionado ao reutilizar
                   // Optionally, activate the alarm immediately or let the user click "Ativar Alarme"
                   // For now, just set the time in the selectors.
                 }}
                 onClearHistory={clearAlarmHistory}
-              />
-              <Separator />
-              <VisualSettingsComponent
-                visualSettings={visualSettings}
-                onVisualSettingChange={handleVisualSettingChange}
               />
             </div>
           </CardContent>

@@ -21,12 +21,3 @@ export type AlarmHistoryItem = {
   time: string; // HH:MM
   triggeredAt: string; // ISO string
 };
-
-export type VisualSettings = {
-  theme: 'light' | 'dark';
-  clockColor: string;
-  clockSize: 'small' | 'medium' | 'large';
-  fontType: 'digital' | 'normal';
-  showDate: boolean;
-  timeFormat: '12h' | '24h';
-};

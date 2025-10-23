@@ -1,72 +1,39 @@
 import React from 'react';
 import { useCurrentTime } from '../../../../hooks/alarmClock/useCurrentTime';
 import { formatTime, formatDate } from '../../../../utils/alarmClock/timeFormatter';
-import { VisualSettings } from '../../../../types/alarmClock/alarm.types';
 import { cn } from '../../../../lib/utils';
+import { useTheme } from '../../../../contexts/ThemeContext'; // Importar o hook de tema global
 
 interface AlarmDisplayProps {
-  visualSettings: VisualSettings;
+  // Não recebe mais visualSettings como prop
+  showDate?: boolean; // Manter opcionalmente se for útil
+  timeFormat?: '12h' | '24h'; // Manter opcionalmente se for útil
 }
 
-const AlarmDisplay: React.FC<AlarmDisplayProps> = ({ visualSettings }) => {
+const AlarmDisplay: React.FC<AlarmDisplayProps> = ({ showDate = true, timeFormat = '24h' }) => {
   const currentTime = useCurrentTime();
-  const formattedTime = formatTime(currentTime, visualSettings.timeFormat);
+  const formattedTime = formatTime(currentTime, timeFormat);
   const formattedDate = formatDate(currentTime);
+  const { theme } = useTheme(); // Usar o tema global
 
-  const clockSizeClasses = {
-    small: 'text-4xl md:text-5xl',
-    medium: 'text-5xl md:text-6xl',
-    large: 'text-6xl md:text-7xl',
-  };
-
-  const fontTypeClasses = {
-    digital: 'font-mono', // Tailwind's default mono font
-    normal: 'font-sans', // Tailwind's default sans font
-  };
-
-  const clockColorClasses = {
-    '#007bff': 'text-blue-500',
-    '#6c757d': 'text-gray-500',
-    '#28a745': 'text-green-500',
-    '#dc3545': 'text-red-500',
-    '#ffc107': 'text-yellow-500',
-    '#17a2b8': 'text-cyan-500',
-    '#6f42c1': 'text-purple-500',
-    // Add more colors as needed, or map to Tailwind classes
-  };
-
-  const getClockColorClass = (color: string) => {
-    // This is a simplified mapping. For more robust solution,
-    // consider dynamic Tailwind classes or inline styles.
-    switch (color) {
-      case '#007bff': return 'text-blue-500';
-      case '#6c757d': return 'text-gray-500';
-      case '#28a745': return 'text-green-500';
-      case '#dc3545': return 'text-red-500';
-      case '#ffc107': return 'text-yellow-500';
-      case '#17a2b8': return 'text-cyan-500';
-      case '#6f42c1': return 'text-purple-500';
-      default: return 'text-primary'; // Default to primary color
-    }
-  };
+  // Estilos padrão que se adaptam ao tema global
+  const textColorClass = theme === 'dark' ? 'text-white' : 'text-gray-900';
+  const dateTextColorClass = theme === 'dark' ? 'text-gray-400' : 'text-gray-600';
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <div
         className={cn(
-          'font-bold',
-          clockSizeClasses[visualSettings.clockSize],
-          fontTypeClasses[visualSettings.fontType],
-          getClockColorClass(visualSettings.clockColor)
+          'font-bold text-5xl md:text-6xl font-sans', // Estilos padrão
+          textColorClass
         )}
       >
         {formattedTime}
       </div>
-      {visualSettings.showDate && (
+      {showDate && (
         <div className={cn(
-          'text-lg md:text-xl mt-2',
-          fontTypeClasses[visualSettings.fontType],
-          getClockColorClass(visualSettings.clockColor)
+          'text-lg md:text-xl mt-2 font-sans', // Estilos padrão
+          dateTextColorClass
         )}>
           {formattedDate}
         </div>

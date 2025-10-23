@@ -11,6 +11,7 @@ interface TimeSelectorProps {
   onSetAlarm: () => void;
   onTestSound: () => void;
   isAlarmSet: boolean;
+  isTestingSound: boolean; // Nova prop para feedback visual
 }
 
 const TimeSelector: React.FC<TimeSelectorProps> = ({
@@ -21,6 +22,7 @@ const TimeSelector: React.FC<TimeSelectorProps> = ({
   onSetAlarm,
   onTestSound,
   isAlarmSet,
+  isTestingSound,
 }) => {
   const hours = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0'));
   const minutes = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0'));
@@ -64,8 +66,8 @@ const TimeSelector: React.FC<TimeSelectorProps> = ({
         <Button onClick={onSetAlarm} variant={isAlarmSet ? 'destructive' : 'default'}>
           {isAlarmSet ? 'Desativar Alarme' : 'Ativar Alarme'}
         </Button>
-        <Button onClick={onTestSound} variant="outline">
-          Testar Som
+        <Button onClick={onTestSound} variant="outline" disabled={isTestingSound}>
+          {isTestingSound ? 'Testando...' : 'Testar Som'}
         </Button>
       </div>
     </div>

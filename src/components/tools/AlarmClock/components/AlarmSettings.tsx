@@ -5,6 +5,7 @@ import { Slider } from '../../../ui/slider';
 import { Switch } from '../../../ui/switch';
 import { AlarmSound } from '../../../../types/alarmClock/alarm.types';
 import { Button } from '../../../ui/button';
+import { Separator } from '../../../ui/separator';
 
 interface AlarmSettingsProps {
   selectedSoundId: string;
@@ -17,6 +18,11 @@ interface AlarmSettingsProps {
   onLoopChange: (checked: boolean) => void;
   onVibrationChange: (checked: boolean) => void;
   onTestSound: () => void;
+  showDate: boolean; // Nova prop
+  setShowDate: (checked: boolean) => void; // Nova prop
+  timeFormat: '12h' | '24h'; // Nova prop
+  setTimeFormat: (format: '12h' | '24h') => void; // Nova prop
+  isTestingSound: boolean; // Nova prop para feedback visual
 }
 
 const AlarmSettings: React.FC<AlarmSettingsProps> = ({
@@ -30,6 +36,11 @@ const AlarmSettings: React.FC<AlarmSettingsProps> = ({
   onLoopChange,
   onVibrationChange,
   onTestSound,
+  showDate,
+  setShowDate,
+  timeFormat,
+  setTimeFormat,
+  isTestingSound,
 }) => {
   return (
     <div className="flex flex-col gap-4 p-4 border rounded-lg shadow-sm">
@@ -49,8 +60,8 @@ const AlarmSettings: React.FC<AlarmSettingsProps> = ({
             ))}
           </SelectContent>
         </Select>
-        <Button onClick={onTestSound} variant="outline" size="sm" className="mt-2">
-          Testar Som
+        <Button onClick={onTestSound} variant="outline" size="sm" className="mt-2" disabled={isTestingSound}>
+          {isTestingSound ? 'Testando...' : 'Testar Som'}
         </Button>
       </div>
 
@@ -74,6 +85,34 @@ const AlarmSettings: React.FC<AlarmSettingsProps> = ({
       <div className="flex items-center justify-between">
         <Label htmlFor="vibration-alarm">Vibrar</Label>
         <Switch id="vibration-alarm" checked={vibration} onCheckedChange={onVibrationChange} />
+      </div>
+
+      <Separator /> {/* Adicionar separador para configurações visuais */}
+      <h3 className="text-lg font-semibold">Configurações de Exibição</h3>
+
+      <div className="flex items-center justify-between">
+        <Label htmlFor="show-date-toggle">Mostrar Data</Label>
+        <Switch
+          id="show-date-toggle"
+          checked={showDate}
+          onCheckedChange={setShowDate}
+        />
+      </div>
+
+      <div className="flex items-center justify-between">
+        <Label htmlFor="time-format-select">Formato da Hora</Label>
+        <Select
+          value={timeFormat}
+          onValueChange={(value: '12h' | '24h') => setTimeFormat(value)}
+        >
+          <SelectTrigger id="time-format-select" className="w-[100px]">
+            <SelectValue placeholder="Formato" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="24h">24h</SelectItem>
+            <SelectItem value="12h">12h</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );

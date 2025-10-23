@@ -4,7 +4,8 @@ import { cn } from '../../../../lib/utils';
 
 interface QuickAlarmsProps {
   onSetQuickAlarm: (hour: string, minute: string) => void;
-  activeAlarmTime: string | null; // HH:MM
+  activeAlarmTime: string | null; // HH:MM - Alarme atualmente ATIVO
+  selectedQuickTime: string | null; // HH:MM - Horário rápido atualmente SELECIONADO
 }
 
 const quickTimes = [
@@ -12,7 +13,7 @@ const quickTimes = [
   '13:00', '14:00', '15:00', '18:00', '20:00', '22:00',
 ];
 
-const QuickAlarms: React.FC<QuickAlarmsProps> = ({ onSetQuickAlarm, activeAlarmTime }) => {
+const QuickAlarms: React.FC<QuickAlarmsProps> = ({ onSetQuickAlarm, activeAlarmTime, selectedQuickTime }) => {
   return (
     <div className="flex flex-col gap-4 p-4 border rounded-lg shadow-sm">
       <h3 className="text-lg font-semibold">Horários Rápidos</h3>
@@ -20,12 +21,17 @@ const QuickAlarms: React.FC<QuickAlarmsProps> = ({ onSetQuickAlarm, activeAlarmT
         {quickTimes.map((time) => {
           const [hour, minute] = time.split(':');
           const isActive = activeAlarmTime === time;
+          const isSelected = selectedQuickTime === time; // Verificar se é o horário selecionado
+
           return (
             <Button
               key={time}
-              variant={isActive ? 'default' : 'outline'}
+              variant={isActive || isSelected ? 'default' : 'outline'} // Destaque se ativo ou selecionado
               onClick={() => onSetQuickAlarm(hour, minute)}
-              className={cn(isActive ? 'bg-primary text-primary-foreground' : '')}
+              className={cn(
+                (isActive || isSelected) ? 'bg-primary text-primary-foreground' : '',
+                'hover:bg-primary/80' // Adicionar um hover para melhor UX
+              )}
             >
               {time}
             </Button>

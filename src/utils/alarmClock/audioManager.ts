@@ -33,6 +33,7 @@ export const stopAlarmSound = () => {
 };
 
 export const testAlarmSound = (soundFile: string, volume: number) => {
+  console.log(`Testando som: ${soundFile} com volume: ${volume}`);
   const testAudio = new Audio(soundFile);
   testAudio.volume = volume;
   testAudio.play().catch(e => console.error("Erro ao testar o som do alarme:", e));

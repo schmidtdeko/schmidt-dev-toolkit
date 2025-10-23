@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Alarm, VisualSettings } from '../../types/alarmClock/alarm.types';
+import { Alarm } from '../../types/alarmClock/alarm.types';
 import { getAlarmSounds, stopAlarmSound } from '../../utils/alarmClock/audioManager';
 import {
   setAlarm as setGlobalAlarm,
@@ -12,14 +12,6 @@ import {
 } from '../../utils/alarmClock/alarmManager';
 import { useAlarmHistory } from './useAlarmHistory';
 
-const DEFAULT_VISUAL_SETTINGS: VisualSettings = {
-  theme: 'light',
-  clockColor: '#007bff',
-  clockSize: 'medium',
-  fontType: 'normal',
-  showDate: true,
-  timeFormat: '24h',
-};
 
 export const useAlarm = () => {
   const alarmSounds = getAlarmSounds();
@@ -27,53 +19,48 @@ export const useAlarm = () => {
 
   const [currentAlarm, setCurrentAlarm] = useState<Alarm | null>(getActiveAlarm());
   const [isAlarmTriggered, setIsAlarmTriggered] = useState(false);
-  const [selectedHour, setSelectedHour] = useState(new Date().getHours().toString().padStart(2, '0'));
-  const [selectedMinute, setSelectedMinute] = useState(new Date().getMinutes().toString().padStart(2, '0'));
+  const [selectedHour, _setSelectedHour] = useState(new Date().getHours().toString().padStart(2, '0'));
+  const [selectedMinute, _setSelectedMinute] = useState(new Date().getMinutes().toString().padStart(2, '0'));
   const [selectedSoundId, setSelectedSoundId] = useState(defaultSound);
   const [volume, setVolume] = useState(0.5);
   const [loop, setLoop] = useState(true);
   const [vibration, setVibration] = useState(true);
-  const [visualSettings, setVisualSettings] = useState<VisualSettings>(DEFAULT_VISUAL_SETTINGS);
+  const [showDate, setShowDate] = useState(true); // Manter showDate como configuração funcional
+  const [timeFormat, setTimeFormat] = useState<'12h' | '24h'>('24h'); // Manter timeFormat como funcional
+  const [isTestingSound, setIsTestingSound] = useState(false); // Novo estado para feedback visual
+  const [selectedQuickTime, setSelectedQuickTime] = useState<string | null>(null); // Novo estado para horário rápido selecionado
 
   const { history, addAlarmToHistory, clearAlarmHistory } = useAlarmHistory();
 
-  // Load settings from localStorage on mount
+  // Load functional settings from localStorage on mount
   useEffect(() => {
     try {
-      const storedVisualSettings = localStorage.getItem('schmidt-tools-alarm-visual-settings');
-      if (storedVisualSettings) {
-        setVisualSettings(JSON.parse(storedVisualSettings));
-      }
       const storedAlarmSettings = localStorage.getItem('schmidt-tools-alarm-settings');
       if (storedAlarmSettings) {
-        const { soundId, volume, loop, vibration } = JSON.parse(storedAlarmSettings);
+        const { soundId, volume, loop, vibration, showDate, timeFormat } = JSON.parse(storedAlarmSettings);
         setSelectedSoundId(soundId || defaultSound);
         setVolume(volume !== undefined ? volume : 0.5);
         setLoop(loop !== undefined ? loop : true);
         setVibration(vibration !== undefined ? vibration : true);
+        setShowDate(showDate !== undefined ? showDate : true);
+        setTimeFormat(timeFormat !== undefined ? timeFormat : '24h');
       }
+      // Limpar configurações visuais antigas do localStorage
+      localStorage.removeItem('schmidt-tools-alarm-visual-settings');
     } catch (error) {
       console.error("Failed to load settings from localStorage", error);
+      localStorage.removeItem('schmidt-tools-alarm-visual-settings'); // Garantir limpeza
     }
   }, [defaultSound]);
 
-  // Save visual settings to localStorage
+  // Save functional settings to localStorage
   useEffect(() => {
     try {
-      localStorage.setItem('schmidt-tools-alarm-visual-settings', JSON.stringify(visualSettings));
-    } catch (error) {
-      console.error("Failed to save visual settings to localStorage", error);
-    }
-  }, [visualSettings]);
-
-  // Save alarm settings to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem('schmidt-tools-alarm-settings', JSON.stringify({ selectedSoundId, volume, loop, vibration }));
+      localStorage.setItem('schmidt-tools-alarm-settings', JSON.stringify({ selectedSoundId, volume, loop, vibration, showDate, timeFormat }));
     } catch (error) {
       console.error("Failed to save alarm settings to localStorage", error);
     }
-  }, [selectedSoundId, volume, loop, vibration]);
+  }, [selectedSoundId, volume, loop, vibration, showDate, timeFormat, selectedQuickTime]);
 
 
   const handleAlarmTrigger = useCallback((alarm: Alarm) => {
@@ -125,6 +112,7 @@ export const useAlarm = () => {
       };
       setGlobalAlarm(newAlarm);
       setCurrentAlarm(newAlarm);
+      setSelectedQuickTime(null); // Limpar seleção de horário rápido ao ativar alarme
     }
   }, [currentAlarm, selectedHour, selectedMinute, selectedSoundId, volume, loop, vibration]);
 
@@ -138,26 +126,38 @@ export const useAlarm = () => {
   const testAlarmSound = useCallback(() => {
     const sound = alarmSounds.find(s => s.id === selectedSoundId);
     if (sound) {
+      setIsTestingSound(true); // Inicia o estado de teste
       const audio = new Audio(sound.file);
       audio.volume = volume;
-      audio.play().catch(e => console.error("Erro ao testar o som:", e));
+      audio.play()
+        .then(() => {
+          // Parar o som após 3 segundos
+          setTimeout(() => {
+            audio.pause();
+            audio.currentTime = 0;
+            setIsTestingSound(false); // Finaliza o estado de teste
+          }, 3000);
+        })
+        .catch(e => {
+          console.error("Erro ao testar o som:", e);
+          setIsTestingSound(false); // Finaliza o estado de teste em caso de erro
+        });
     }
   }, [alarmSounds, selectedSoundId, volume]);
-
-  const handleVisualSettingChange = useCallback(
-    (key: keyof VisualSettings, value: VisualSettings[keyof VisualSettings]) => {
-      setVisualSettings((prev) => ({ ...prev, [key]: value }));
-    },
-    []
-  );
 
   return {
     currentAlarm,
     isAlarmTriggered,
     selectedHour,
-    setSelectedHour,
+    setSelectedHour: useCallback((hour: string) => {
+      _setSelectedHour(hour);
+      setSelectedQuickTime(null); // Limpar seleção de horário rápido ao modificar manualmente
+    }, []),
     selectedMinute,
-    setSelectedMinute,
+    setSelectedMinute: useCallback((minute: string) => {
+      _setSelectedMinute(minute);
+      setSelectedQuickTime(null); // Limpar seleção de horário rápido ao modificar manualmente
+    }, []),
     selectedSoundId,
     setSelectedSoundId,
     volume,
@@ -166,8 +166,6 @@ export const useAlarm = () => {
     setLoop,
     vibration,
     setVibration,
-    visualSettings,
-    handleVisualSettingChange,
     alarmSounds,
     setAlarmTime,
     stopTriggeredAlarm,
@@ -175,5 +173,12 @@ export const useAlarm = () => {
     history,
     addAlarmToHistory, // Expose for quick alarms to add to history directly if needed
     clearAlarmHistory,
+    showDate,
+    setShowDate,
+    timeFormat,
+    setTimeFormat,
+    isTestingSound, // Retornar o novo estado
+    selectedQuickTime,
+    setSelectedQuickTime,
   };
 };
