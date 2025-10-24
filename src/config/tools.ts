@@ -163,6 +163,16 @@ export const toolsConfig: ToolConfig[] = [
     seoDescription: 'Teste e melhore sua velocidade de digitação com o Teste de Digitação do Schmidt Dev Toolkit.',
   },
   {
+    name: 'Comparador de Textos',
+    path: '/diff-checker',
+    icon: FileText,
+    category: 'Texto',
+    description: 'Compare duas versões de texto ou código e veja as diferenças.',
+    keywords: ['diff', 'checker', 'comparador', 'texto', 'código', 'diferenças'],
+    seoTitle: 'Comparador de Textos (Diff Checker) - Schmidt Dev Toolkit',
+    seoDescription: 'Compare duas versões de texto ou código e veja as diferenças destacadas em tempo real.',
+  },
+  {
     name: 'Cron Expression Builder',
     path: '/cron-builder',
     icon: Clock,
