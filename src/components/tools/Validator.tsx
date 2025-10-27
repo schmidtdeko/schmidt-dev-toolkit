@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { validateCPF } from '@/utils/cpf';
 import { validateCNPJ } from '@/utils/cnpj';
 import { CheckCircle2, XCircle } from 'lucide-react';
-import { trackToolUsage } from '@/utils/tracking';
 
 const Validator = () => {
   const [input, setInput] = useState('');
@@ -20,11 +19,9 @@ const Validator = () => {
       if (cleaned.length === 11) {
         const isValid = validateCPF(input);
         setResult({ isValid, type: 'CPF' });
-        if (isValid) trackToolUsage('cpf_cnpj_validator');
       } else if (cleaned.length === 14) {
         const isValid = validateCNPJ(input);
         setResult({ isValid, type: 'CNPJ' });
-        if (isValid) trackToolUsage('cpf_cnpj_validator');
       } else {
         setResult({ isValid: false, type: 'Formato inválido' });
       }

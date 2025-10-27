@@ -3,7 +3,6 @@ import { CopyButton } from '@/components/CopyButton';
 import { Copy } from 'lucide-react';
 import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from 'sonner';
-import { trackToolUsage } from '@/utils/tracking';
 
 interface PasswordOptions {
   uppercase: boolean;
@@ -58,7 +57,6 @@ const PasswordGenerator = () => {
       generatePassword(length, options)
     );
     setPasswords(generated);
-    trackToolUsage('password_generator');
   };
 
   const handleCopyIndividual = async (password: string) => {

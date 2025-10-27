@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { trackToolUsage } from '@/utils/tracking';
 
 const CharCounter = () => {
   const [text, setText] = useState('');
@@ -7,7 +6,6 @@ const CharCounter = () => {
 
   useEffect(() => {
     if (text.length > 0 && !hasTracked) {
-      trackToolUsage('char_counter');
       setHasTracked(true);
     }
   }, [text, hasTracked]);

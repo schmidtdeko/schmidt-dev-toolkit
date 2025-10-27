@@ -11,7 +11,6 @@ import { toolsConfig } from "@/config/tools";
 const queryClient = new QueryClient();
 
 // Importações lazy explícitas para cada componente de ferramenta
-const LazyDashboard = lazy(() => import("@/components/tools/Dashboard"));
 const LazyCPFGenerator = lazy(() => import("@/components/tools/CPFGenerator"));
 const LazyCNPJGenerator = lazy(() => import("@/components/tools/CNPJGenerator"));
 const LazyValidator = lazy(() => import("@/components/tools/Validator"));
@@ -29,10 +28,11 @@ const LazyTypingTest = lazy(() => import("@/components/tools/TypingTest"));
 const LazyCronBuilder = lazy(() => import("@/components/tools/CronBuilder"));
 const LazyAlarmClock = lazy(() => import("@/components/tools/AlarmClock/AlarmClock"));
 const LazyDiffChecker = lazy(() => import("@/components/tools/DiffChecker"));
+const LazyAbout = lazy(() => import("@/components/tools/About"));
+const LazyAllTools = lazy(() => import("@/components/tools/AllTools"));
 
 // Mapear os paths para os componentes lazy
 const toolComponents: Record<string, React.LazyExoticComponent<React.FC>> = {
-  '/dashboard': LazyDashboard,
   '/cpf-generator': LazyCPFGenerator,
   '/cnpj-generator': LazyCNPJGenerator,
   '/validator': LazyValidator,
@@ -74,6 +74,8 @@ const App = () => {
                   <Suspense fallback={<div>Carregando ferramenta...</div>}>
                     <Routes>
                       <Route path="/" element={<Home />} />
+                      <Route path="/about" element={<LazyAbout />} />
+                      <Route path="/tools" element={<LazyAllTools />} />
                       {toolsConfig.map((tool) => {
                         const ToolComponent = toolComponents[tool.path];
                         return (
