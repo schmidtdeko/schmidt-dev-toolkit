@@ -40,7 +40,7 @@ const About = () => {
       <Card className="p-6">
         <h2 className="text-2xl font-semibold mb-4">Habilidades e Tecnologias</h2>
         <div className="flex flex-wrap gap-2">
-          {['SQL', 'TypeScript', 'N8N', 'API', 'Inteligência Artificial', 'Desenvolvimento Web', 'Hospedagem', 'Git', 'Design', 'Microserviços'].map((skill) => (
+          {['SQL', 'EDI', 'N8N', 'API', 'Inteligência Artificial', 'Desenvolvimento Web', 'Sistemas de Logística', 'Git', 'Design', 'Microserviços'].map((skill) => (
             <Badge key={skill} variant="secondary" className="text-sm px-3 py-1">
               {skill}
             </Badge>

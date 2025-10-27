@@ -9,6 +9,7 @@ export interface ToolConfig {
   keywords: string[];
   seoTitle?: string;
   seoDescription?: string;
+  seoImage?: string; // Adicionado para permitir imagem de SEO específica por ferramenta
 }
 
 export const toolsConfig: ToolConfig[] = [

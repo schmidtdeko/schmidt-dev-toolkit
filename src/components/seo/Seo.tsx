@@ -16,6 +16,7 @@ export const Seo: React.FC<SeoProps> = ({ toolConfig }) => {
   const description = toolConfig.seoDescription || defaultDescription;
   const keywords = toolConfig.keywords.join(', ') || defaultKeywords;
   const url = `https://www.schmidtnow.com${toolConfig.path}`; // Usar a URL base do projeto
+  const image = toolConfig.seoImage || defaultImage; // Usar imagem específica da ferramenta ou a padrão
 
   return (
     <Helmet>
@@ -29,14 +30,14 @@ export const Seo: React.FC<SeoProps> = ({ toolConfig }) => {
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={defaultImage} /> {/* Usar uma imagem específica para a ferramenta se disponível */}
+      <meta property="og:image" content={image} />
 
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={url} />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={defaultImage} /> {/* Usar uma imagem específica para a ferramenta se disponível */}
+      <meta property="twitter:image" content={image} />
     </Helmet>
   );
 };
