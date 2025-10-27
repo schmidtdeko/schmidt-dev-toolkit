@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import CryptoJS from 'crypto-js';
 import { CopyButton } from '@/components/CopyButton';
-import { trackToolUsage } from '@/utils/tracking';
 
 type HashAlgorithm = 'MD5' | 'SHA1' | 'SHA256' | 'SHA512';
 
@@ -33,7 +32,6 @@ const HashCalculator = () => {
           break;
       }
       setHash(result);
-      if (result) trackToolUsage('hash_calculator');
     }, 300);
 
     return () => clearTimeout(debounce);

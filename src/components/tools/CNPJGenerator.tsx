@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { generateCNPJ } from '@/utils/cnpj';
 import { CopyButton } from '@/components/CopyButton';
-import { trackToolUsage } from '@/utils/tracking';
 
 const CNPJGenerator = () => {
   const [quantity, setQuantity] = useState(1);
@@ -11,7 +10,6 @@ const CNPJGenerator = () => {
   const handleGenerate = () => {
     const cnpjs = Array.from({ length: quantity }, () => generateCNPJ(formatted));
     setResults(cnpjs);
-    trackToolUsage('cnpj_generator');
   };
 
   return (

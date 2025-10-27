@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { X } from 'lucide-react'; // Manter apenas X para o botão de fechar
+import { X, HomeIcon, LayoutGrid, Info } from 'lucide-react'; // Adicionar HomeIcon, LayoutGrid e Info
 import { cn } from '@/lib/utils';
 import { toolsConfig } from '@/config/tools'; // Importar a configuração centralizada
 
@@ -51,6 +51,54 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         </div>
 
         <nav className="p-4 space-y-6 pt-20 md:pt-4">
+          <ul className="space-y-1">
+            <li>
+              <NavLink
+                to="/"
+                onClick={onClose}
+                className={({ isActive }) =>
+                  cn(
+                    "sidebar-link",
+                    isActive && "sidebar-link-active"
+                  )
+                }
+              >
+                <HomeIcon className="h-4 w-4 flex-shrink-0" />
+                <span className="text-sm">Início</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/tools"
+                onClick={onClose}
+                className={({ isActive }) =>
+                  cn(
+                    "sidebar-link",
+                    isActive && "sidebar-link-active"
+                  )
+                }
+              >
+                <LayoutGrid className="h-4 w-4 flex-shrink-0" />
+                <span className="text-sm">Ferramentas</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/about"
+                onClick={onClose}
+                className={({ isActive }) =>
+                  cn(
+                    "sidebar-link",
+                    isActive && "sidebar-link-active"
+                  )
+                }
+              >
+                <Info className="h-4 w-4 flex-shrink-0" />
+                <span className="text-sm">Sobre</span>
+              </NavLink>
+            </li>
+          </ul>
+
           {Object.entries(categorizedTools).map(([category, items]) => (
             <div key={category}>
               <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-2">

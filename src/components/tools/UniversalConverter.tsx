@@ -3,7 +3,6 @@ import { CopyButton } from '@/components/CopyButton';
 import { toast } from 'sonner';
 import pako from 'pako';
 import { Download, Sparkles } from 'lucide-react';
-import { trackToolUsage } from '@/utils/tracking';
 
 type FormatType = 'text' | 'base64' | 'xml' | 'gzip';
 
@@ -224,7 +223,6 @@ const UniversalConverter = () => {
         }
 
         setOutput(result);
-        trackToolUsage('universal_converter');
         const outputBytes = new Blob([result]).size;
         
         const info: ConversionInfo = {

@@ -3,7 +3,6 @@ import Papa from 'papaparse';
 import { CopyButton } from '@/components/CopyButton';
 import { toast } from 'sonner';
 import { Download } from 'lucide-react';
-import { trackToolUsage } from '@/utils/tracking';
 
 const JSONCSVConverter = () => {
   const [jsonInput, setJsonInput] = useState('');
@@ -14,7 +13,6 @@ const JSONCSVConverter = () => {
       const data = JSON.parse(jsonInput);
       const csv = Papa.unparse(data);
       setCsvInput(csv);
-      trackToolUsage('json_csv_converter');
       toast.success('Convertido para CSV!');
     } catch (e) {
       toast.error('JSON inválido');

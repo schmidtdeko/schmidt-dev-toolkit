@@ -1,4 +1,4 @@
-import { LucideIcon, FileText, CheckCircle2, RefreshCw, Code, Calculator, Type, CreditCard, KeyRound, Hash, LayoutDashboard, Clock } from 'lucide-react';
+import { LucideIcon, FileText, CheckCircle2, RefreshCw, Code, Calculator, Type, CreditCard, KeyRound, Hash, LayoutDashboard, Clock, HomeIcon, LayoutGrid, Info } from 'lucide-react';
 
 export interface ToolConfig {
   name: string;
@@ -12,16 +12,6 @@ export interface ToolConfig {
 }
 
 export const toolsConfig: ToolConfig[] = [
-  {
-    name: 'Dashboard',
-    path: '/dashboard',
-    icon: LayoutDashboard,
-    category: 'Visão Geral',
-    description: 'Visão geral das ferramentas e estatísticas de uso.',
-    keywords: ['dashboard', 'visão geral', 'estatísticas'],
-    seoTitle: 'Dashboard - Schmidt Dev Toolkit',
-    seoDescription: 'Visão geral das ferramentas e estatísticas de uso do Schmidt Dev Toolkit.',
-  },
   {
     name: 'Gerador de CPF',
     path: '/cpf-generator',

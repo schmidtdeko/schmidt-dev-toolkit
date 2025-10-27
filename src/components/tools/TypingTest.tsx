@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { ToolLayout } from '@/components/layout/ToolLayout';
 import { portugueseWords } from '@/utils/words';
-import { trackToolUsage } from '@/utils/tracking';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -71,7 +70,6 @@ const TypingTest = () => {
   const endTest = () => {
     setIsTestRunning(false);
     setShowResults(true);
-    trackToolUsage('typing_test');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
